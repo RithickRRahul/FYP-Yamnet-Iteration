@@ -1,0 +1,37 @@
+# Core
+fastapi
+uvicorn[standard]
+python-multipart
+websockets
+python-dotenv
+
+# Audio Processing
+librosa
+soundfile
+pydub
+numpy
+
+# ML - Acoustic (YAMNet)
+tensorflow
+tensorflow-hub
+
+# ML - Speech-to-Text
+faster-whisper
+
+# ML - NLP Toxicity
+transformers
+torch
+torchaudio
+
+# ML - VAD
+# silero-vad loaded via torch.hub
+
+# ML - Emotion
+# Uses transformers + wav2vec2 (already installed above)
+
+# Classifiers
+scikit-learn
+joblib
+
+# Utils
+pandas

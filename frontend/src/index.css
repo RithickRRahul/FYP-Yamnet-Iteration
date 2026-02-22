@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-dark-bg text-slate-200 antialiased min-h-screen overflow-x-hidden;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-dark-card/60 backdrop-blur-md border border-dark-border rounded-xl shadow-lg;
+  }
+  
+  .btn-primary {
+    @apply px-4 py-2 bg-dark-accent/10 text-dark-accent border border-dark-accent/30 rounded-lg hover:bg-dark-accent/20 transition-all font-medium flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  
+  .btn-danger {
+    @apply px-4 py-2 bg-alert-critical/10 text-alert-critical border border-alert-critical/30 rounded-lg hover:bg-alert-critical/20 transition-all font-medium flex items-center justify-center gap-2;
+  }
+  
+  .status-badge-safe {
+    @apply px-2.5 py-0.5 rounded-full text-xs font-medium bg-alert-safe/10 text-alert-safe border border-alert-safe/20 shadow-glow-safe;
+  }
+  
+  .status-badge-warning {
+    @apply px-2.5 py-0.5 rounded-full text-xs font-medium bg-alert-warning/10 text-alert-warning border border-alert-warning/20 shadow-glow-warning;
+  }
+  
+  .status-badge-critical {
+    @apply px-2.5 py-0.5 rounded-full text-xs font-medium bg-alert-critical/10 text-alert-critical border border-alert-critical/20 shadow-glow-critical animate-pulse;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-dark-bg;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-dark-border rounded-full hover:bg-slate-500 transition-colors;
+}
