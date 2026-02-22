@@ -2,7 +2,7 @@
 Decision Engine — Alert level assignment and explanation generation.
 
 Deterministic rules, no probabilistic inference.
-Assigns: Safe 🟢 / Warning 🟡 / Critical 🔴
+Assigns: Safe 🟢 / Violence 🔴
 """
 
 import logging

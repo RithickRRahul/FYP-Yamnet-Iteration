@@ -7,29 +7,22 @@ Assign a final alert level per chunk and overall, with human-readable explanatio
 
 | Level | Condition | Color |
 |-------|-----------|-------|
-| **Safe** 🟢 | fused_score < 0.3 AND no escalation | Green |
-| **Warning** 🟡 | fused_score 0.3–0.7 OR rising trend OR escalation_score > 0.3 | Yellow |
-| **Critical** 🔴 | fused_score > 0.7 sustained 2+ chunks OR spike > 0.85 OR escalation_score > 0.7 | Red |
+| **Safe** 🟢 | No violence indicators detected | Green |
+| **Violence** 🔴 | Elevated scores or identified violence trends | Red |
 
 ## Decision Rules (Deterministic)
 
 ```python
 def determine_alert(fused_score, temporal):
-    # Critical conditions
-    if fused_score > 0.85:
-        return "Critical"
-    if temporal["trend"] == "spike":
-        return "Critical"
-    if temporal["trend"] == "sustained" and fused_score > 0.7:
-        return "Critical"
+    reasons = []
     
-    # Warning conditions
     if fused_score > 0.3:
-        return "Warning"
-    if temporal["trend"] == "rising":
-        return "Warning"
-    if temporal["escalation_score"] > 0.3:
-        return "Warning"
+        reasons.append(f"Elevated violence score ({fused_score:.2f})")
+    if temporal["trend"] in ["spike", "rising"]:
+        reasons.append("Rising violence indicators")
+    
+    if reasons:
+        return "Violence"
     
     return "Safe"
 ```
@@ -40,10 +33,8 @@ def determine_alert(fused_score, temporal):
 # After all chunks are processed:
 chunk_alerts = [chunk["alert"] for chunk in results]
 
-if "Critical" in chunk_alerts:
-    overall = "Critical"
-elif "Warning" in chunk_alerts:
-    overall = "Warning"
+if "Violence" in chunk_alerts:
+    overall = "Violence"
 else:
     overall = "Safe"
 ```
@@ -73,7 +64,7 @@ An event is logged when `fused_score > 0.3`:
     "end": chunk["end_time"],
     "type": "gunshot" | "abusive_speech" | "aggressive_emotion" | "combined",
     "confidence": fused_score,
-    "alert": "Warning" | "Critical",
+    "alert": "Violence",
     "explanation": "Violent acoustic event detected: Gunshot"
 }
 ```
@@ -82,7 +73,7 @@ An event is logged when `fused_score > 0.3`:
 ```python
 {
     "violence_detected": True,
-    "overall_alert": "Critical",
+    "overall_alert": "Violence",
     "events": [...],
     "escalation_trend": "rising",
     "temporal_prediction": "violence likely to escalate"

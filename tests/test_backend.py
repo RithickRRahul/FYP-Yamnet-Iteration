@@ -220,15 +220,15 @@ def test_decision():
     alert3 = determine_chunk_alert(0.1, {"trend": "stable", "escalation_score": 0.0})
     print(f"  Score 0.1: {alert3['alert']} -- {alert3['explanation']}")
 
-    assert alert1["alert"] == "Critical"
-    assert alert2["alert"] == "Warning"
+    assert alert1["alert"] == "Violence"
+    assert alert2["alert"] == "Violence"
     assert alert3["alert"] == "Safe"
 
     overall = determine_overall_alert([
-        {"alert": "Safe"}, {"alert": "Warning"}, {"alert": "Critical"}, {"alert": "Safe"}
+        {"alert": "Safe"}, {"alert": "Violence"}, {"alert": "Violence"}, {"alert": "Safe"}
     ])
     print(f"  Overall: {overall['overall_alert']} (violence: {overall['violence_detected']})")
-    assert overall["overall_alert"] == "Critical"
+    assert overall["overall_alert"] == "Violence"
     print("  [PASS] Decision OK")
 
 

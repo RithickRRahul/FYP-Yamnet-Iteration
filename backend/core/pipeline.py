@@ -88,7 +88,7 @@ def analyze_file(
         chunk_result["alert"] = alert_info["alert"]
         chunk_result["explanation"] = alert_info["explanation"]
 
-        # Log events (when alert is Warning or Critical)
+        # Log events (when alert is Violence)
         if alert_info["alert"] != "Safe":
             event_type = classify_event_type(
                 acoustic_score=chunk_result.get("acoustic_violence_score", 0),

@@ -20,7 +20,7 @@ Body: file (binary)
 {
   "session_id": "uuid",
   "violence_detected": true,
-  "overall_alert": "Critical",
+  "overall_alert": "Violence",
   "duration": 65.2,
   "total_chunks": 26,
   "events": [
@@ -28,7 +28,7 @@ Body: file (binary)
       "start": 14.2, "end": 17.1,
       "type": "abusive_speech",
       "confidence": 0.81,
-      "alert": "Warning",
+      "alert": "Violence",
       "explanation": "Abusive language detected in speech"
     }
   ],
@@ -63,7 +63,7 @@ Real-time mic streaming analysis.
 {
   "chunk_id": 5,
   "fused_score": 0.45,
-  "alert": "Warning",
+  "alert": "Violence",
   "transcript": "I told you to stop",
   "event_type": "abusive_speech"
 }
